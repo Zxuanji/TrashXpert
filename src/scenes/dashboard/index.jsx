@@ -12,6 +12,10 @@ import GeographyChart from "../../components/GeographyChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
+import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -21,7 +25,7 @@ const Dashboard = () => {
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+        <Header title="DASHBOARD" subtitle="Trash Level"/>
 
         <Box>
           <Button
@@ -47,20 +51,21 @@ const Dashboard = () => {
         gap="20px"
       >
         {/* ROW 1 */}
+        {/* backgroundColor={colors.primary[400]} */}
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.grey[300]}
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
           <StatBox
-            title="12,361"
-            subtitle="Emails Sent"
+            title="18L"
+            subtitle="General Waste"
             progress="0.75"
             increase="+14%"
             icon={
-              <EmailIcon
+              <DeleteIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -68,18 +73,18 @@ const Dashboard = () => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.greenAccent[500]}
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
           <StatBox
-            title="431,225"
-            subtitle="Sales Obtained"
+            title="26L"
+            subtitle="Plastic"
             progress="0.50"
             increase="+21%"
             icon={
-              <PointOfSaleIcon
+              <DeleteIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -87,18 +92,18 @@ const Dashboard = () => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.yellowAccent[300]}
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
           <StatBox
-            title="32,441"
-            subtitle="New Clients"
+            title="12L"
+            subtitle="Mental"
             progress="0.30"
             increase="+5%"
             icon={
-              <PersonAddIcon
+              <DeleteIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -106,18 +111,18 @@ const Dashboard = () => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.blueAccent1[700]}
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
           <StatBox
-            title="1,325,134"
-            subtitle="Traffic Received"
+            title="6L"
+            subtitle="Paper"
             progress="0.80"
             increase="+43%"
             icon={
-              <TrafficIcon
+              <DeleteIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -143,14 +148,14 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Revenue Generated
+                Trash Volume Changes in Four Bins
               </Typography>
               <Typography
                 variant="h3"
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
               >
-                $59,342.32
+                8am - 6pm
               </Typography>
             </Box>
             <Box>
@@ -169,6 +174,53 @@ const Dashboard = () => {
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            sx={{ padding: "30px 30px 0 30px" }}
+          >
+            Trash Volume
+          </Typography>
+          <Box height="250px" mt="-20px">
+            <BarChart isDashboard={true} />
+          </Box>
+        </Box>
+
+        {/* ROW 3 */}
+        
+        <Box
+          gridColumn="span 6"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+          p="30px"
+        >
+          <Typography variant="h5" fontWeight="600">
+            Total waste disposed
+          </Typography>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt="25px"
+          >
+            <ProgressCircle size="125" />
+            <Typography
+              variant="h5"
+              color={colors.greenAccent[500]}
+              sx={{ mt: "15px" }}
+            >
+              2569L waste disposed
+            </Typography>
+            <Typography>Includes general, plastic, mental, paper waste</Typography>
+          </Box>
+        </Box>
+        {/* trash volume */}
+
+        <Box
+          gridColumn="span 6"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
           overflow="auto"
         >
           <Box
@@ -180,7 +232,7 @@ const Dashboard = () => {
             p="15px"
           >
             <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-              Recent Transactions
+              Recent Auto-Waste Disposal
             </Typography>
           </Box>
           {mockTransactions.map((transaction, i) => (
@@ -204,62 +256,20 @@ const Dashboard = () => {
                   {transaction.user}
                 </Typography>
               </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
-              <Box
+              {/* <Box color={colors.grey[100]}>{transaction.date}</Box> */}
+              <Box sx={{ color: colors.grey[100], mr: 2 }}>{transaction.date}</Box>
+              {/* <Box
                 backgroundColor={colors.greenAccent[500]}
                 p="5px 10px"
                 borderRadius="4px"
               >
                 ${transaction.cost}
-              </Box>
+              </Box> */}
             </Box>
           ))}
         </Box>
-
-        {/* ROW 3 */}
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          p="30px"
-        >
-          <Typography variant="h5" fontWeight="600">
-            Campaign
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography
-              variant="h5"
-              color={colors.greenAccent[500]}
-              sx={{ mt: "15px" }}
-            >
-              $48,352 revenue generated
-            </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            Sales Quantity
-          </Typography>
-          <Box height="250px" mt="-20px">
-            <BarChart isDashboard={true} />
-          </Box>
-        </Box>
-        <Box
+        
+        {/* <Box
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -275,7 +285,7 @@ const Dashboard = () => {
           <Box height="200px">
             <GeographyChart isDashboard={true} />
           </Box>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

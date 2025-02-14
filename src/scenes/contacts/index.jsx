@@ -11,7 +11,6 @@ const Contacts = () => {
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
-    { field: "registrarId", headerName: "Registrar ID" },
     {
       field: "name",
       headerName: "Name",
@@ -26,18 +25,8 @@ const Contacts = () => {
       align: "left",
     },
     {
-      field: "phone",
-      headerName: "Phone Number",
-      flex: 1,
-    },
-    {
       field: "email",
       headerName: "Email",
-      flex: 1,
-    },
-    {
-      field: "address",
-      headerName: "Address",
       flex: 1,
     },
     {
@@ -45,18 +34,14 @@ const Contacts = () => {
       headerName: "City",
       flex: 1,
     },
-    {
-      field: "zipCode",
-      headerName: "Zip Code",
-      flex: 1,
-    },
+    
   ];
 
   return (
     <Box m="20px">
       <Header
-        title="CONTACTS"
-        subtitle="List of Contacts for Future Reference"
+        title="Team 1"
+        subtitle="The great four team members"
       />
       <Box
         m="40px 0 0 0"

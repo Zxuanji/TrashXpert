@@ -80,7 +80,7 @@ const Sidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
+                  TrashXpert
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -107,10 +107,10 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Ed Roh
+                  Smart Bin​
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  VP Fancy Admin
+                  Team 1
                 </Typography>
               </Box>
             </Box>
@@ -132,36 +132,36 @@ const Sidebar = () => {
             >
               Data
             </Typography>
-            <Item
+            {/* <Item
               title="Manage Team"
               to="/team"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
-              title="Contacts Information"
+              title="Group Members"
               to="/contacts"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="Invoices Balances"
               to="/invoices"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
 
-            <Typography
+            {/* <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
               Pages
-            </Typography>
-            <Item
+            </Typography> */}
+            {/* <Item
               title="Profile Form"
               to="/form"
               icon={<PersonOutlinedIcon />}
@@ -174,14 +174,14 @@ const Sidebar = () => {
               icon={<CalendarTodayOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
-            <Item
+            /> */}
+            {/* <Item
               title="FAQ Page"
               to="/faq"
               icon={<HelpOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
 
             <Typography
               variant="h6"
@@ -197,13 +197,13 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="Pie Chart"
               to="/pie"
               icon={<PieChartOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="Line Chart"
               to="/line"
@@ -211,13 +211,13 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="Geography Chart"
               to="/geography"
               icon={<MapOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
           </Box>
         </Menu>
       </ProSidebar>

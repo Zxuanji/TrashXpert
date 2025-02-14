@@ -39,8 +39,8 @@ const BarChart = ({ isDashboard = false }) => {
           },
         },
       }}
-      keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-      indexBy="country"
+      keys={["general", "plastic", "mental", "paper"]}
+      indexBy="bin_type"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
@@ -80,6 +80,7 @@ const BarChart = ({ isDashboard = false }) => {
         legendPosition: "middle",
         legendOffset: 32,
       }}
+      enableGridY={false}
       axisLeft={{
         tickSize: 5,
         tickPadding: 5,
@@ -87,6 +88,7 @@ const BarChart = ({ isDashboard = false }) => {
         legend: isDashboard ? undefined : "food", // changed
         legendPosition: "middle",
         legendOffset: -40,
+        tickValues: [0, 5, 10, 15, 20, 25, 30], 
       }}
       enableLabel={false}
       labelSkipWidth={12}
