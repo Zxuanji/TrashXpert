@@ -351,7 +351,7 @@ export const mockBarData = [
     mentalColor: "hsl(257, 70%, 50%)",
   },
   {
-    bin_type: "paper",
+    bin_type: "Paper",
     paper: 5,
     paperColor: "hsl(106, 70%, 50%)",
   },
