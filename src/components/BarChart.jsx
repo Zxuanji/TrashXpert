@@ -2,11 +2,31 @@ import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
 import { mockBarData as data } from "../data/mockData";
+import { useState, useEffect } from 'react';
 
 const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [data, setData] = useState([]);
+  
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://192.168.0.105:5000/api/barchartdata');
+      const result = await response.json();
+      console.log("Fetched Data:", result)
+      setData(result);  // 更新状态
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
+  // 使用 useEffect 每5秒请求一次数据
+  useEffect(() => {
+    fetchData();  // 初始化时获取数据
+    const interval = setInterval(fetchData, 5000); // 每5秒刷新一次数据
+    return () => clearInterval(interval); // 清除定时器
+  }, []);
+  
   return (
     <ResponsiveBar
       data={data}
