@@ -16,10 +16,69 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
+import { useState, useEffect } from 'react';
 
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  // 垃圾桶数据状态（单位：L）
+  const [generalWaste, setGeneralWaste] = useState(18);
+  const [plasticWaste, setPlasticWaste] = useState(26);
+  const [mentalWaste, setMentalWaste] = useState(12);
+  const [paperWaste, setPaperWaste] = useState(6);
+
+  // 交易记录状态
+  const [transactions, setTransactions] = useState([]);
+
+  // **获取垃圾桶容量数据**
+  const fetchWasteData = async () => {
+    try {
+      const response = await fetch("http://192.168.0.105:5000/api/barchartdata");
+      const result = await response.json();
+
+      setGeneralWaste(result.find(item => item.bin_type === "General")?.general || 0);
+      setPlasticWaste(result.find(item => item.bin_type === "Plastic")?.plastic || 0);
+      setMentalWaste(result.find(item => item.bin_type === "Mental")?.mental || 0);
+      setPaperWaste(result.find(item => item.bin_type === "Paper")?.paper || 0);
+    } catch (error) {
+      console.error("Error fetching waste data:", error);
+    }
+  };
+
+  // **获取垃圾桶状态（是否满了）**
+  const fetchBinStatus = async () => {
+    try {
+      const response = await fetch("http://192.168.0.105:5000/api/bin-status");
+      const data = await response.json();
+
+      if (data.bin_full == "Bin is full") {
+        console.log("Bin is full! Adding new transaction...");
+
+        const newTransaction = {
+          txId: Math.random().toString(36).substring(7), // 生成随机 ID
+          user: "General Waste Bin",
+          date: new Date().toLocaleString(),
+        };
+
+        setTransactions((prev) => [newTransaction, ...prev.slice(0, 8)]); // 只保留最近 5 条记录
+      }
+    } catch (error) {
+      console.error("Error fetching bin status:", error);
+    }
+  };
+
+  // **统一定时轮询（5 秒一次）**
+  useEffect(() => {
+    fetchWasteData();  // 获取垃圾桶容量
+    fetchBinStatus();   // 获取垃圾桶状态
+    const interval = setInterval(() => {
+      fetchWasteData();
+      fetchBinStatus();
+    }, 5000);
+
+    return () => clearInterval(interval); // 组件卸载时清除定时器
+  }, []);
 
   return (
     <Box m="20px">
@@ -60,7 +119,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="18L"
+            title={`${generalWaste}L`}
             subtitle="General Waste"
             progress="0.75"
             increase="+14%"
@@ -79,7 +138,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="26L"
+            title={`${plasticWaste}L`}
             subtitle="Plastic"
             progress="0.50"
             increase="+21%"
@@ -98,7 +157,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="12L"
+            title={`${mentalWaste}L`}
             subtitle="Mental"
             progress="0.30"
             increase="+5%"
@@ -117,7 +176,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="6L"
+            title={`${paperWaste}L`}
             subtitle="Paper"
             progress="0.80"
             increase="+43%"
@@ -235,7 +294,7 @@ const Dashboard = () => {
               Recent Auto-Waste Disposal
             </Typography>
           </Box>
-          {mockTransactions.map((transaction, i) => (
+          {transactions.map((transaction, i) => (
             <Box
               key={`${transaction.txId}-${i}`}
               display="flex"

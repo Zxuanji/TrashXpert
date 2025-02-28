@@ -155,6 +155,7 @@ try:
                         send_bin_full_data(bin_type)
                         bin_full_notified = True
             else:
+            	led_port = LED_PAPER_FULL if bin_type == "paper" else LED_PLASTIC_FULL if bin_type == "plastic" else LED_METAL_FULL
                 full_bin_start_time[bin_type] = None
                 grovepi.analogWrite(led_port, 0)
                 bin_full_notified = False
