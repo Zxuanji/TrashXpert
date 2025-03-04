@@ -1,0 +1,31 @@
+<!-- move_to_goal.launch -->
+
+<launch>
+  <!-- 启动 roscore -->
+  <group>
+    <node pkg="roslaunch" type="roscore" name="roscore" required="true" />
+  </group>
+
+  <!-- 启动 TurtleBot3 的硬件节点 -->
+  <group>
+    <include file="$(find turtlebot3_bringup)/launch/turtlebot3_robot.launch" />
+  </group>
+
+  <!-- 启动 AMCL 定位系统 -->
+  <group>
+    <include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch">
+      <arg name="map_file" value="$(find your_package)/maps/map.yaml" />
+    </include>
+  </group>
+
+  <!-- 启动 move_base 路径规划节点 -->
+  <group>
+    <include file="$(find turtlebot3_navigation)/launch/move_base.launch" />
+  </group>
+
+  <!-- 启动自动移动脚本 -->
+  <group>
+    <node pkg="your_package" type="move_to_goal.py" name="move_to_goal" output="screen" />
+  </group>
+
+</launch>

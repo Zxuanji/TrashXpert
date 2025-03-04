@@ -1,0 +1,29 @@
+obstacle_range: 3.0
+raytrace_range: 3.5
+
+footprint: [[-0.205, -0.155], [-0.205, 0.155], [0.077, 0.155], [0.077, -0.155]]
+#robot_radius: 0.17
+
+inflation_radius: 1.0
+cost_scaling_factor: 3.0
+
+map_type: costmap
+#observation_sources: scan
+#scan: {sensor_frame: base_scan, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+
+# 设置激光扫描数据源为过滤后的激光数据主题
+observation_sources: laser_scan_filtered
+laser_scan_filtered:
+  sensor_frame: base_scan  # 与雷达传感器的坐标框架一致
+  data_type: LaserScan
+  topic: /laser_scan_filtered  # 修改为您的过滤后的激光数据主题
+  marking: true
+  clearing: true
+
+# 激光数据的 scan 配置
+scan:
+  sensor_frame: base_scan  # 与雷达传感器的坐标框架一致
+  data_type: LaserScan
+  topic: /laser_scan_filtered  # 确保这里与您的自定义激光数据主题一致
+  marking: true
+  clearing: true

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- 加载地图 -->
+    <arg name="map_file" default="$(env HOME)/map.yaml"/>
+    <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)"/>
+
+    <!-- 启动 AMCL 进行定位 -->
+    <include file="$(find turtlebot3_navigation)/launch/amcl.launch"/>
+
+    <!-- 启动 move_base 进行路径规划和避障 -->
+    <include file="$(find turtlebot3_navigation)/launch/move_base.launch"/>
+    
+    <!-- 启动 TurtleBot3 基础功能 -->
+    <include file="$(find turtlebot3_bringup)/launch/turtlebot3_robot.launch"/>
+    
+    <!-- 启动监听传感器的 Python 节点 -->
+    <node pkg="bin_move" type="sensor_listener.py" name="sensor_listener" output="screen"/>
+
+
+</launch>
