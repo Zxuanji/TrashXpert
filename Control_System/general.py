@@ -12,7 +12,7 @@ LED_PORT = 4  # D4
 
 # Timer variables for bin full condition
 FULL_THRESHOLD_DISTANCE = 3  # 3cm to consider bin full
-FULL_HOLD_TIME = 3  # seconds to confirm bin is full                 ######################## CHANGE
+FULL_HOLD_TIME = 3  # seconds to confirm bin is full                 
 full_bin_start_time = None
 
 # Ubuntu Server IP
@@ -27,7 +27,7 @@ def get_distance(sensor_port):
     except IOError:
         return float('inf')
 
-def move_servo_to_angle(port, angle):                              ############################ ADD
+def move_servo_to_angle(port, angle):                              
     for angle in range(0, 181, 10):
         grovepi.analogWrite(port, angle)
         time.sleep(0.05)
@@ -39,7 +39,7 @@ def move_servo_to_angle(port, angle):                              #############
     time.sleep(1)
 
 # Function to initialize servo with a sweep
-def initialize_servo_to_real_zero(port):                           ############################ ADD
+def initialize_servo_to_real_zero(port):                           
     print("Initializing servo to real 0° position...")
     for angle in range(0, 181, 10):
         grovepi.analogWrite(port, angle)
@@ -52,7 +52,7 @@ def initialize_servo_to_real_zero(port):                           #############
     print("✅ Servo set to real 0° position.")
     time.sleep(1)
 
-def open_bin_lid():                                                  ###################### ADD
+def open_bin_lid():                                                  
     print("Opening bin lid...")
     move_servo_to_angle(SERVO_PORT, 90)
 
