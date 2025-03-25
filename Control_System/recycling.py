@@ -26,9 +26,9 @@ LED_PLASTIC_FULL = 15  # A1
 LED_METAL_FULL = 16  # A2
 
 # Bin full detection settings
-FULL_THRESHOLD_DISTANCE = 10  # cm (consider bin full if distance < 2 cm from experiment)
+FULL_THRESHOLD_DISTANCE = 2  # cm (consider bin full if distance < 2 cm from experiment)
 FULL_HOLD_TIME = 3  # Bin must be full for 3 seconds (determined from experiment)
-TRIGGER_THRESHOLD_DISTANCE = 50  # cm (Activate camera when an object is detected within 30 cm)
+TRIGGER_THRESHOLD_DISTANCE = 50  # cm (Activate camera when an object is detected within 50 cm)
 full_bin_start_time = {"paper": None, "plastic": None, "metal": None}
 
 # Function to measure distance using a Grove ultrasonic sensor
